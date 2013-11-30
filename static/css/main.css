@@ -26,7 +26,9 @@ ul {
     padding: 1em 0;
     webkit-order: 1;
     order: 1;
-    color: white ;}
+    color: white ;
+    font-size: 12em;
+}
 
 .ohman-content {
     width: 100%;
@@ -92,6 +94,7 @@ ul {
     float: left;
 }
 .box3 {
+    color: white;
     height: 100%;
     background: black;
     -webkit-flex-grow: 4;
