@@ -17,13 +17,14 @@ p {
 ul {
     margin: 0;
     padding: 1em 5%;}
+
 .flex-container {
     max-width: 75em;
     margin: 0 auto;}
+
 .header {
     width: 100%;
-    background: black;
-    padding: .7em 0;
+    background: black; 
     webkit-order: 1;
     order: 1;
     color: white ;
@@ -74,32 +75,34 @@ ul {
 }
 
 .box {
+    float: left; 
     border: .2em;
 }
 
 .box1 {
     
-    background: black;
-    color: white; 
+    background: white;
+    color: black; 
     -webkit-flex-grow: 3;
             flex-grow: 3;
-    float: left;
+    
     height: 100%;
 }
 .box2 {
     height: 100%;
-    background: white;
+    color: white;
+    background: black;
     -webkit-flex-grow: 5;
             flex-grow: 5;
-    float: left;
+
 }
 .box3 {
-    color: white;
+    color: black;
     height: 100%;
-    background: black;
+    background: white;
     -webkit-flex-grow: 4;
             flex-grow: 4;
-    float: left;
+
 }
 .primary {
     -webkit-order: 3;
