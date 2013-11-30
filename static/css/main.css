@@ -87,7 +87,7 @@ ul {
 }
 
 .box {
-
+    opacity: .5555;
     float: left; 
     border-left: .2em;
     border-style: solid;
