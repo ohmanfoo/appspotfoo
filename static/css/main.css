@@ -121,12 +121,15 @@ ul {
 }
 
 .primary {
-
+    border-style: solid;
+    opacity: .8;
     -webkit-order: 3;
     order: 3;
 }
 
 .secondary {
+    border-style: solid;
+    opacity: .8;
     -webkit-order: 4;
     order: 4;
 }
