@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box; }
+body {
+    background-color: white;
+    cursor: default;
+    font-family: arial, sans-serif;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+
+p {
+    margin: 0;
+    padding: 1em 5%;
+    color: black; }
+
+ul {
+    margin: 0;
+    padding: 1em 5%;}
+.flex-container {
+    max-width: 75em;
+    margin: 0 auto;}
+.header {
+    width: 100%;
+    background: black;
+    padding: 1em 0;
+    webkit-order: 1;
+    order: 1;
+    color: white ;}
+.ohman-content {
+    width: 100%;
+    background: #eee;
+    padding: 1em 0;}
+.sidebar {
+    width: 100%;
+    padding: 1em 0;}
+.primary {
+    background: #FFBA80;}
+.secondary {
+    background: #FFF1E6; }
+.footer {
+    width: 100%;
+    background: #444;
+    color: #E6FEFF;
+    padding: 1em 0; }
+
+.flex-content {
+    padding: 0;}
+
+@supports (flex-wrap: wrap) {
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+    }
+    .ohman-content {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;}
+}
+.ohman-content {
+    height: 30em;
+    -webkit-order: 3;
+    order: 3;
+}
+
+.box {
+    border: .2em;
+}
+
+.box1 {
+    border: white;
+    background: black;
+    color: white; 
+    -webkit-flex-grow: 3;
+            flex-grow: 3;
+    float: left;
+    height: 100%;
+}
+.box2 {
+    height: 100%;
+    background: #E6FEFF;
+    -webkit-flex-grow: 5;
+            flex-grow: 5;
+    float: left;
+}
+.box3 {
+    height: 100%;
+    background: #F67609;
+    -webkit-flex-grow: 4;
+            flex-grow: 4;
+    float: left;
+}
+.primary {
+    -webkit-order: 3;
+    order: 3;
+}
+.secondary {
+    -webkit-order: 4;
+    order: 4;
+}
+.footer {
+    -webkit-order: 5;
+    order: 5;
+}
+
+/*-----------------*/
+
+@media screen and (max-width: 32em) {
+    .ohman-content {
+        width: 100%;
+        -webkit-order: 2;
+        order: 2;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+    }
+    .primary {
+        width: 100%;
+        height: 33.333%;
+        background: pink;
+        -webkit-order: 6;
+        order: 6;
+    }
+    .secondary {
+        -webkit-order: 3;
+        order: 3;
+    }
+    
+    .box1 {
+        order: 3;
+        width: 100%;
+        height: 33.333%;
+    }
+    .box2 {
+        order: 4;
+        width: 100%;
+        height: 33.333%;
+    }
+
+    .box3 {
+        width: 100%;
+        height: 33.333%;
+        -webkit-flex-grow: 2;
+                flex-grow: 2;
+        -webkit-order: 5;
+                order: 5;
+    }
+    .sidebar {
+        width: 100%;
+        height: 33.333%;
+    }
+}
+
+
+/*-----------------*/
+
+@media screen and (min-width: 48em) and @supports (flex-wrap: wrap) {
+    .ohman-content {
+        width: 77.76%;
+        -webkit-order: 3;
+        order: 3;
+        -webkit-flow-flex: row wrap;
+        flex-flow: row wrap;
+    }
+    .primary {
+        padding: 1em 3.333%;
+        -webkit-order: 2;
+        order: 2;
+    }
+    .box1 {
+        -webkit-flex-grow: 8;
+        flex-grow: 8;
+        -webkit-order: 1;
+        order: 1;
+        width: 55%;
+    }
+    .box2 {   
+        -webkit-order: 2;
+        order: 2;
+        width: 45%;
+    }
+    .box3 {
+        -webkit-order: 3;
+        order: 3;
+        -webkit-flex-grow: 3;
+        flex-grow: 3;
+    }    
+    .secondary {
+        width: 22.2%;
+
+    }
+}
+
+
+/* For non-flex browsers, Safari, Android, iOS */
+
+@media (-webkit-min-device-pixel-ratio: 0) { 
+    /*...*/
+}
+
