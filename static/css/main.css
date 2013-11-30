@@ -23,11 +23,11 @@ ul {
 .header {
     width: 100%;
     background: black;
-    padding: 1em 0;
+    padding: .7em 0;
     webkit-order: 1;
     order: 1;
     color: white ;
-    font-size: 12em;
+    font-size: 5em;
 }
 
 .ohman-content {
