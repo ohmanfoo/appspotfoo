@@ -7,20 +7,24 @@ body {
     font-size: 1em;
     margin: 0;
     padding: 0;
-    overflow: hidden; }
+    overflow: hidden; 
+}
 
 p {
     margin: 0;
     padding: 1em 5%;
-    color: black; }
+    color: black; 
+}
 
 ul {
     margin: 0;
-    padding: 1em 5%;}
+    padding: 1em 5%;
+}
 
 .flex-container {
     max-width: 75em;
-    margin: 0 auto;}
+    margin: 0 auto;
+}
 
 .header {
     width: 100%;
@@ -34,26 +38,32 @@ ul {
 .ohman-content {
     width: 100%;
     background: #eee;
-    padding: 1em 0;}
+    padding: 1em 0;
+}
 
 .sidebar {
     width: 100%;
-    padding: 1em 0;}
+    padding: 1em 0;
+}
 
 .primary {
-    background: #FFBA80;}
+    background: #FFBA80;
+}
 
 .secondary {
-    background: #FFF1E6; }
+    background: #FFF1E6; 
+}
 
 .footer {
     width: 100%;
     background: #444;
     color: #E6FEFF;
-    padding: 1em 0; }
+    padding: 1em 0; 
+}
 
 .flex-content {
-    padding: 0;}
+    padding: 0;
+}
 
 @supports (flex-wrap: wrap) {
     .flex-container {
@@ -66,52 +76,61 @@ ul {
         display: -webkit-flex;
         display: flex;
         -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;}
+        flex-flow: row wrap;
+    }
 }
 .ohman-content {
+
     height: 30em;
     -webkit-order: 3;
     order: 3;
 }
 
 .box {
+
     float: left; 
-    border: .2em;
+    border-left: .2em;
+    border-style: solid;
+    border-color: black;
 }
 
 .box1 {
     
     background: white;
-    color: black; 
     -webkit-flex-grow: 3;
-            flex-grow: 3;
-    
+            flex-grow: 3; 
     height: 100%;
 }
+
 .box2 {
+
     height: 100%;
-    color: white;
-    background: black;
+    background: white;
     -webkit-flex-grow: 5;
             flex-grow: 5;
 
 }
+
 .box3 {
-    color: black;
+    
     height: 100%;
     background: white;
     -webkit-flex-grow: 4;
             flex-grow: 4;
 
 }
+
 .primary {
+
     -webkit-order: 3;
     order: 3;
 }
+
 .secondary {
     -webkit-order: 4;
     order: 4;
 }
+
 .footer {
     -webkit-order: 5;
     order: 5;
