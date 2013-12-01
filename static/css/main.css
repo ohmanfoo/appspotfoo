@@ -21,6 +21,26 @@ ul {
     padding: 1em 5%;
 }
 
+
+// Experimental Flexbox use. Moz doesn't support flex-wrap.
+
+@supports (flex-wrap: wrap) {
+    .flex-container {
+        display: -webkit-flex;
+        display:         flex;
+        -webkit-flex-flow: row wrap;
+                flex-flow: row wrap;
+    }
+    .ohman-content {
+        display: -webkit-flex;
+        display:         flex;
+        -webkit-flex-flow: row wrap;
+                flex-flow: row wrap;
+    }
+}
+
+
+
 .flex-container {
     max-width: 75em;
     margin: 0 auto;
@@ -106,23 +126,6 @@ ul {
     opacity: .7;
     -webkit-order: 4;
             order: 4;
-}
-
-// Experimental Flexbox use. Moz doesn't support flex-wrap.
-
-@supports (flex-wrap: wrap) {
-    .flex-container {
-        display: -webkit-flex;
-        display:         flex;
-        -webkit-flex-flow: row wrap;
-                flex-flow: row wrap;
-    }
-    .ohman-content {
-        display: -webkit-flex;
-        display:         flex;
-        -webkit-flex-flow: row wrap;
-                flex-flow: row wrap;
-    }
 }
 
 
