@@ -7,45 +7,62 @@ body {
     font-size: 1em;
     margin: 0;
     padding: 0;
-    overflow: hidden; }
+    overflow: hidden; 
+}
 
 p {
     margin: 0;
     padding: 1em 5%;
-    color: black; }
+    color: black; 
+}
 
 ul {
     margin: 0;
-    padding: 1em 5%;}
+    padding: 1em 5%;
+}
+
 .flex-container {
     max-width: 75em;
-    margin: 0 auto;}
+    margin: 0 auto;
+}
+
 .header {
     width: 100%;
-    background: black;
-    padding: 1em 0;
+    background: black; 
     webkit-order: 1;
     order: 1;
-    color: white ;}
+    color: white ;
+    font-size: 5em;
+}
+
 .ohman-content {
     width: 100%;
     background: #eee;
-    padding: 1em 0;}
+    padding: 1em 0;
+}
+
 .sidebar {
     width: 100%;
-    padding: 1em 0;}
+    padding: 1em 0;
+}
+
 .primary {
-    background: #FFBA80;}
+    background: #FFBA80;
+}
+
 .secondary {
-    background: #FFF1E6; }
+    background: #FFF1E6; 
+}
+
 .footer {
     width: 100%;
     background: #444;
-    color: #E6FEFF;
-    padding: 1em 0; }
+    padding: 1em 0; 
+}
 
 .flex-content {
-    padding: 0;}
+    padding: 0;
+}
 
 @supports (flex-wrap: wrap) {
     .flex-container {
@@ -58,50 +75,64 @@ ul {
         display: -webkit-flex;
         display: flex;
         -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;}
+        flex-flow: row wrap;
+    }
 }
 .ohman-content {
+
     height: 30em;
     -webkit-order: 3;
     order: 3;
 }
 
 .box {
-    border: .2em;
+    opacity: .5555;
+    float: left; 
 }
 
 .box1 {
-    border: white;
-    background: black;
-    color: white; 
-    -webkit-flex-grow: 3;
-            flex-grow: 3;
-    float: left;
+    
+    background: white;
+    -webkit-flex-grow: 2;
+            flex-grow: 2; 
     height: 100%;
 }
+
 .box2 {
+
     height: 100%;
-    background: #E6FEFF;
+    background: white;
     -webkit-flex-grow: 5;
             flex-grow: 5;
-    float: left;
+
 }
+
 .box3 {
+    
     height: 100%;
-    background: #F67609;
-    -webkit-flex-grow: 4;
-            flex-grow: 4;
-    float: left;
+    background: white;
+    -webkit-flex-grow: 5;
+            flex-grow: 5;
+
 }
+
 .primary {
+    border-style: solid;
+    opacity: .6;
     -webkit-order: 3;
     order: 3;
 }
+
 .secondary {
+    border-style: solid;
+    opacity: .7;
     -webkit-order: 4;
     order: 4;
 }
+
 .footer {
+    border-style: solid;
+    opacity: .789;
     -webkit-order: 5;
     order: 5;
 }
@@ -199,4 +230,3 @@ ul {
 @media (-webkit-min-device-pixel-ratio: 0) { 
     /*...*/
 }
-
