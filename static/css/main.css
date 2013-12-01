@@ -33,8 +33,8 @@ ul {
 .header {
     width: 100%;
     background: black; 
-    webkit-order: 1;
-    order: 1;
+    -webkit-order: 1;
+            order: 1;
     color: white ;
     font-size: 5em;
 }
@@ -86,7 +86,7 @@ ul {
     border-style: solid;
     opacity: .789;
     -webkit-order: 5;
-    order: 5;
+            order: 5;
     width: 100%;
     background: #444;
     padding: 1em 0; 
@@ -97,7 +97,7 @@ ul {
     background: pink;
     opacity: .6;
     -webkit-order: 3;
-    order: 3;
+            order: 3;
 }
 
 .secondary {
@@ -105,7 +105,7 @@ ul {
     border-style: solid;
     opacity: .7;
     -webkit-order: 4;
-    order: 4;
+            order: 4;
 }
 
 // Experimental Flexbox use. Moz doesn't support flex-wrap.
@@ -113,15 +113,15 @@ ul {
 @supports (flex-wrap: wrap) {
     .flex-container {
         display: -webkit-flex;
-        display: flex;
+        display:         flex;
         -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
+                flex-flow: row wrap;
     }
     .ohman-content {
         display: -webkit-flex;
-        display: flex;
+        display:         flex;
         -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
+                flex-flow: row wrap;
     }
 }
 
@@ -133,20 +133,20 @@ ul {
     .ohman-content {
         width: 100%;
         -webkit-order: 2;
-        order: 2;
+                order: 2;
         -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
+                flex-flow: row wrap;
     }
     .primary {
         width: 100%;
         height: 33.333%;
         background: pink;
         -webkit-order: 6;
-        order: 6;
+                order: 6;
     }
     .secondary {
         -webkit-order: 3;
-        order: 3;
+                order: 3;
     }
     
     .box1 {
@@ -181,32 +181,32 @@ ul {
     .ohman-content {
         width: 77.76%;
         -webkit-order: 3;
-        order: 3;
+                order: 3;
         -webkit-flow-flex: row wrap;
-        flex-flow: row wrap;
+                flex-flow: row wrap;
     }
     .primary {
         padding: 1em 3.333%;
         -webkit-order: 2;
-        order: 2;
+                order: 2;
     }
     .box1 {
         -webkit-flex-grow: 8;
-        flex-grow: 8;
+                flex-grow: 8;
         -webkit-order: 1;
-        order: 1;
+                order: 1;
         width: 55%;
     }
     .box2 {   
         -webkit-order: 2;
-        order: 2;
+                order: 2;
         width: 45%;
     }
     .box3 {
         -webkit-order: 3;
-        order: 3;
+                order: 3;
         -webkit-flex-grow: 3;
-        flex-grow: 3;
+                flex-grow: 3;
     }    
     .secondary {
         width: 22.2%;
