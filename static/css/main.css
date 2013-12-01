@@ -88,16 +88,13 @@ ul {
 .box {
     opacity: .5555;
     float: left; 
-    border-left: .2em;
-    border-style: solid;
-    border-color: black;
 }
 
 .box1 {
     
     background: white;
-    -webkit-flex-grow: 3;
-            flex-grow: 3; 
+    -webkit-flex-grow: 2;
+            flex-grow: 2; 
     height: 100%;
 }
 
@@ -114,8 +111,8 @@ ul {
     
     height: 100%;
     background: white;
-    -webkit-flex-grow: 4;
-            flex-grow: 4;
+    -webkit-flex-grow: 5;
+            flex-grow: 5;
 
 }
 
