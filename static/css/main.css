@@ -35,6 +35,10 @@ ul {
     font-size: 5em;
 }
 
+.header > h1 {
+    font-size: 100%;
+}
+
 .ohman-content {
     width: 100%;
     background: #eee;
@@ -93,8 +97,8 @@ ul {
 .box1 {
     
     background: white;
-    -webkit-flex-grow: 2;
-            flex-grow: 2; 
+    -webkit-flex-grow: 3;
+            flex-grow: 3; 
     height: 100%;
 }
 
