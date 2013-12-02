@@ -50,6 +50,7 @@ ul {
     padding: 1em 0;
 }
 
+}
 .primary {
     background: #FFBA80;
 }
@@ -92,6 +93,10 @@ ul {
 .box {
     opacity: .5555;
     float: left; 
+}
+
+.box > h2 {
+    text-align: center;
 }
 
 .box1 {
