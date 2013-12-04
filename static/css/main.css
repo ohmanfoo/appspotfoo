@@ -27,6 +27,10 @@ ul {
     margin: 0 auto;
 }
 
+.flex-content {
+    padding: 0;
+}
+
 .header {
     width: 100%;
     height: 100%;
@@ -36,6 +40,7 @@ ul {
     color: white ;
     font-size: 5em;
     padding: 0.1em;
+    border-radius: 0.15em;
 }
 
 .header > h1 {
@@ -49,17 +54,25 @@ ul {
     padding: 1em 0;
 }
 
+.primary {
+    background: white;
+    border-style: solid;
+    -webkit-order: 3;
+    order: 3;
+    background: black;
+    color: white;
+    border-radius: 0.515em;
+}
+
 .sidebar {
     width: 100%;
     padding: 1em 0;
 }
 
-}
-.primary {
-    background: white;
-}
-
 .secondary {
+    border-style: solid;
+    -webkit-order: 4;
+    order: 4;
     background: white; 
 }
 
@@ -68,29 +81,6 @@ ul {
     background: black;
     color: white;
     padding: 1em 0; 
-}
-
-.flex-content {
-    padding: 0;
-}
-
-@supports (flex-wrap: wrap) {
-    .box1, .box2, .box3 {
-        -webkit-flex-grow: 5;
-                flex-grow: 5; 
-    }
-    .flex-container {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
-    }
-    .ohman-content {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
-    }
 }
 .ohman-content {
     height: 30em;
@@ -113,24 +103,11 @@ ul {
     width: 33%;
 }
 
-.primary {
-    border-style: solid;
-    -webkit-order: 3;
-    order: 3;
-    background: black;
-    color: white;
-}
-
-.secondary {
-    border-style: solid;
-    -webkit-order: 4;
-    order: 4;
-}
-
 .footer {
     border-style: solid;
     -webkit-order: 5;
     order: 5;
+    border-radius: 0.515em;
 }
 
 .icons {
@@ -174,6 +151,24 @@ ul {
 }
 
 
+@supports (flex-wrap: wrap) {
+    .box1, .box2, .box3 {
+        -webkit-flex-grow: 5;
+                flex-grow: 5; 
+    }
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+    }
+    .ohman-content {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+    }
+}
 /*-----------------*/
 
 @media screen and (orientation : portrait) {
