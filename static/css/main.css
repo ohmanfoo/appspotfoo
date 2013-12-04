@@ -40,7 +40,7 @@ ul {
     color: white ;
     font-size: 5em;
     padding: 0.1em;
-    border-radius: 0.15em;
+    border-radius: 0.10em;
 }
 
 .header > h1 {
@@ -51,7 +51,9 @@ ul {
 .ohman-content {
     width: 100%;
     background: #eee;
-    padding: 1em 0;
+    height: 30em;
+    -webkit-order: 3;
+    order: 3;
 }
 
 .primary {
@@ -81,11 +83,6 @@ ul {
     background: black;
     color: white;
     padding: 1em 0; 
-}
-.ohman-content {
-    height: 30em;
-    -webkit-order: 3;
-    order: 3;
 }
 
 .box {
