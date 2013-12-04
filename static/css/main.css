@@ -1,9 +1,10 @@
 * {
     box-sizing: border-box; }
 body {
-    background-color: white;
+    background-color: #FFF1E6;
+    opacity: .7;
     cursor: default;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Denk One', sans-serif;
     font-size: 1em;
     margin: 0;
     padding: 0;
@@ -28,15 +29,18 @@ ul {
 
 .header {
     width: 100%;
+    height: 100%;
     background: black; 
-    webkit-order: 1;
+    -webkit-order: 1;
     order: 1;
     color: white ;
     font-size: 5em;
+    padding: 0.1em;
 }
 
 .header > h1 {
     font-size: 100%;
+    text-align: center;
 }
 
 .ohman-content {
@@ -52,16 +56,17 @@ ul {
 
 }
 .primary {
-    background: #FFBA80;
+    background: white;
 }
 
 .secondary {
-    background: #FFF1E6; 
+    background: white; 
 }
 
 .footer {
     width: 100%;
-    background: #444;
+    background: black;
+    color: white;
     padding: 1em 0; 
 }
 
@@ -70,6 +75,10 @@ ul {
 }
 
 @supports (flex-wrap: wrap) {
+    .box1, .box2, .box3 {
+        -webkit-flex-grow: 5;
+                flex-grow: 5; 
+    }
     .flex-container {
         display: -webkit-flex;
         display: flex;
@@ -84,99 +93,119 @@ ul {
     }
 }
 .ohman-content {
-
     height: 30em;
     -webkit-order: 3;
     order: 3;
 }
 
 .box {
-    opacity: .5555;
     float: left; 
 }
 
 .box > h2 {
     text-align: center;
+    color: black;
 }
 
-.box1 {
-    
+.box1, .box2, .box3 {
     background: white;
-    -webkit-flex-grow: 3;
-            flex-grow: 3; 
     height: 100%;
-}
-
-.box2 {
-
-    height: 100%;
-    background: white;
-    -webkit-flex-grow: 5;
-            flex-grow: 5;
-
-}
-
-.box3 {
-    
-    height: 100%;
-    background: white;
-    -webkit-flex-grow: 5;
-            flex-grow: 5;
-
+    width: 33%;
 }
 
 .primary {
     border-style: solid;
-    opacity: .6;
     -webkit-order: 3;
     order: 3;
+    background: black;
+    color: white;
 }
 
 .secondary {
     border-style: solid;
-    opacity: .7;
     -webkit-order: 4;
     order: 4;
 }
 
 .footer {
     border-style: solid;
-    opacity: .789;
     -webkit-order: 5;
     order: 5;
 }
 
+.icons {
+    width: 240px;
+    margin: 0 auto;
+}
+
+.icons i {
+    display: block;
+    font-size: 1.5em;
+    line-height: 50px;
+    width: 60px;
+    text-align: center;
+}
+
+.icons a {
+    text-decoration: none;
+    color: white;
+    display:  inline-block;
+    margin: .8em;
+    border-radius: 5em;
+    position: relative;
+}
+
+.icons a:before, .icons a:after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+}
+
+.tw {background: #00ACF0;}
+.fb {background: #3B5997;}
+.gh {background: black;}
+.li {background: #007DB8;}
+
+.tw, .fb, .gh, .li {
+    width: 10%;
+    text-align: center;
+    line-height: 150%;
+}
+
+
 /*-----------------*/
 
-@media screen and (max-width: 32em) {
+@media screen and (orientation : portrait) {
     .ohman-content {
         width: 100%;
         -webkit-order: 2;
         order: 2;
         -webkit-flex-flow: row wrap;
         flex-flow: row wrap;
+
     }
     .primary {
         width: 100%;
         height: 33.333%;
-        background: pink;
-        -webkit-order: 6;
-        order: 6;
     }
     .secondary {
         -webkit-order: 3;
         order: 3;
+        background: white;
     }
     
     .box1 {
         order: 3;
         width: 100%;
         height: 33.333%;
+        float: left;
     }
     .box2 {
         order: 4;
         width: 100%;
         height: 33.333%;
+        float: left;
     }
 
     .box3 {
@@ -186,6 +215,7 @@ ul {
                 flex-grow: 2;
         -webkit-order: 5;
                 order: 5;
+        float: left;
     }
     .sidebar {
         width: 100%;
@@ -194,48 +224,6 @@ ul {
 }
 
 
-/*-----------------*/
-
-@media screen and (min-width: 48em) and @supports (flex-wrap: wrap) {
-    .ohman-content {
-        width: 77.76%;
-        -webkit-order: 3;
-        order: 3;
-        -webkit-flow-flex: row wrap;
-        flex-flow: row wrap;
-    }
-    .primary {
-        padding: 1em 3.333%;
-        -webkit-order: 2;
-        order: 2;
-    }
-    .box1 {
-        -webkit-flex-grow: 8;
-        flex-grow: 8;
-        -webkit-order: 1;
-        order: 1;
-        width: 55%;
-    }
-    .box2 {   
-        -webkit-order: 2;
-        order: 2;
-        width: 45%;
-    }
-    .box3 {
-        -webkit-order: 3;
-        order: 3;
-        -webkit-flex-grow: 3;
-        flex-grow: 3;
-    }    
-    .secondary {
-        width: 22.2%;
-
-    }
-}
-
-
 /* For non-flex browsers, Safari, Android, iOS */
 
-@media (-webkit-min-device-pixel-ratio: 0) { 
-    /*...*/
-}
+
