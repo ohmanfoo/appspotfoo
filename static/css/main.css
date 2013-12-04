@@ -1,8 +1,6 @@
 * {
     box-sizing: border-box; }
 body {
-    background-color: #FFF1E6;
-    opacity: .7;
     cursor: default;
     font-family: 'Denk One', sans-serif;
     font-size: 1em;
@@ -50,7 +48,7 @@ ul {
 
 .ohman-content {
     width: 100%;
-    background: #eee;
+    background: white;
     height: 30em;
     -webkit-order: 3;
     order: 3;
@@ -73,16 +71,20 @@ ul {
 
 .secondary {
     border-style: solid;
+    border-left: none;
+    border-right: none;
     -webkit-order: 4;
     order: 4;
     background: white; 
+    text-align: center;
 }
 
 .footer {
     width: 100%;
     background: black;
     color: white;
-    padding: 1em 0; 
+    padding: 1em 0;
+    text-align: center;
 }
 
 .box {
@@ -98,6 +100,8 @@ ul {
     background: white;
     height: 100%;
     width: 33%;
+    margin-top: 0.5em;
+    border-top: solid;
 }
 
 .footer {
