@@ -151,6 +151,15 @@ ul {
     line-height: 150%;
 }
 
+.gh {
+    color:#999;
+    background-color: black;
+    background-image: linear-gradient(grey, rgba(255,255,255,0));
+}
+
+@keyframes .gh {
+    100% {background-color: white;}
+}
 
 @supports (flex-wrap: wrap) {
     .box1, .box2, .box3 {
