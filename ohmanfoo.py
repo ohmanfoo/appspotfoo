@@ -62,9 +62,6 @@ def valid_pw(name, password, h):
     salt = h.split(',')[0]
     return h == make_pw_hash(name, password, salt)
 
-def invites_key(group = 'default'):
-    return db.Key.from_path('invites', group)
-
 def users_key(group = 'default'):
     return db.Key.from_path('users', group)
 
@@ -126,202 +123,6 @@ class User(db.Model):
         u = cls.by_name(name)
         if u and valid_pw(name, pw, u.pw_hash):
             return u
-
-class Invite(db.Model):
-
-    fname = db.StringProperty(required = True)
-    lname = db.StringProperty(required = True)
-    email = db.StringProperty(required = True)
-    psize = db.IntegerProperty(required = True)
-    auth_id = db.StringProperty(required = True)
-    auth_flag = db.BooleanProperty()
-
-    def render(self):
-        return render_str("invite.html", i = self)
-
-    @classmethod
-    def by_auth_id(cls, auth_id):
-        i = Invite.all().filter('auth_id=', auth_id).get()
-        return i
-
-    @classmethod
-    def by_email(cls, email):
-        i = db.GqlQuery("SELECT * FROM Invite " +
-                        "WHERE email = :1 ", email)
-        return i.get()
-
-    @classmethod
-    def confirm(cls, email):
-        i = cls.by_email(email)
-        i.auth_flag = True
-        return i.put()
-
-    @classmethod
-    def add_invite(cls, fname, lname, email, psize):
-        name = fname + lname
-        auth_id = make_secure_val(email)
-        return Invite(parent = invites_key(),
-                      fname = fname,
-                      lname = lname,
-                      email = email,
-                      psize = psize,
-                      auth_id = auth_id,
-                      auth_flag = False)
-
-    @classmethod    
-    def send_mail(cls, email, auth_id):
-        if email != None:
-            #if not auth_flag == False:
-            #   pass
-            #else:            
-            sender_address = "<rsvp.karenandles@gmail.com>"
-            subject = "You Are Invited!"
-            message = mail.EmailMessage(sender=sender_address,
-                                        subject=subject)
-            user_address = email
-
-            img_name = 'Karen_and_Les_Wedding_Invite.jpg'
-            message.to = user_address
-            message.attachments = [(img_name, invite_jpg)]
-            confirmation_url = cls.createNewUserConfirmation(user_address, auth_id)
-            message.body = """            
-Come celebrate the union of Karen and Les this July with us, 
-
-
-Fri 12 July 2013
-
-
-
-When you are ready to confirm your attendance please click the link below. 
-            %s
-            """ % confirmation_url
-
-            message.html = """
-<p> Come celebrate the union of Karen and Les this July with us, </p>
-
-<p> Fri 12 July 2013 </p>
-
-
-<p> When you are ready to confirm your attendance please click the link below. </p>
-
-
-<a href='%s'> Click here to confirm your attendance.</a>
-        """ % confirmation_url
-
-            message.send()
-
-        else:
-            msg = "there's no email!"
-            self.render('/admin/rsvplist.html')
-    @classmethod
-    def createNewUserConfirmation(cls, email, auth_id):
-        url = "http://karenandlesrsvp.appspot.com"
-        #auth_token = auth_id.split(';')[1]
-        confirmation_url = url + "/confirmation?q=" + auth_id
-
-        return confirmation_url
-
-class SignupInvite(OhmanHandler):
-
-    def get(self):
-        if self.user:
-            order_by = self.request.get('order')
-            invites = Invite.all()
-            if not order_by:
-                invites.order("fname")
-            elif order_by == 'name':
-                invites.order("lname")
-            elif order_by == 'confirmed':
-                invites.order("auth_flag")
-            elif order_by == 'party':
-                invites.order("psize")
-
-            self.render("/admin/rsvplist.html", invites = invites)
-        else: 
-            self.redirect('/')
-
-    def post(self):
-        have_error = False
-        self.firstname = self.request.get('firstname')
-        self.lastname = self.request.get('lastname')        
-        self.email = self.request.get('email')
-        params = dict(firstname = self.firstname,
-                      lastname = self.lastname,
-                      email = self.lastname)
-        if not valid_username(self.firstname):
-            params['error_firstname'] = "That's not a name."
-            have_error = True
-        if not valid_username(self.lastname):
-            params['error_lastname'] = "That's not a name."
-            have_error = True
-        if not valid_email(self.email):
-            params['error_email'] = "That's not a valid email."
-            have_error = True
-        if have_error:
-            self.render('/admin/register.html', **params)
-        else:
-            self.done()
-
-    def done(self, *a, **kw):
-        raise NotImplementedError
-
-class RegisterInvite(SignupInvite):
-
-    def done(self):
-        email = self.email
-        u = Invite.all().filter('email =', email).get()
-        if u:
-            msg = 'Email already registered'
-            self.render('admin/new_invitee.html', error = msg)
-        else:
-            u = Invite.add_invite(self.firstname, self.lastname, self.email)
-            u.put()
-            u.send_mail(self.email, u.auth_id)
-            self.redirect('/admin/register')
-
-class SelfSignupInvite(OhmanHandler):
-    def get(self):
-        self.render("new_self_invitee.html")
-
-    def post(self):
-        have_error = False
-        self.firstname = self.request.get('firstname')
-        self.lastname = self.request.get('lastname')        
-        self.email = self.request.get('email')
-        self.psize = int(self.request.get('psize'))
-        params = dict(firstname = self.firstname,
-                      lastname = self.lastname,
-                      email = self.lastname)
-        if not valid_username(self.firstname):
-            params['error_firstname'] = "That's not a name."
-            have_error = True
-        if not valid_username(self.lastname):
-            params['error_lastname'] = "That's not a name."
-            have_error = True
-        if not valid_email(self.email):
-            params['error_email'] = "That's not a valid email."
-            have_error = True
-        if have_error:
-            self.render('/new_self_invitee.html', **params)
-        else:
-            self.done()
-
-    def done(self, *a, **kw):
-        raise NotImplementedError
-
-class SelfRegisterInvite(SelfSignupInvite):
-
-    def done(self):
-        email = self.email
-        u = Invite.all().filter('email =', email).get()
-        if u:
-            msg = 'Email already registered'
-            self.render('/new_self_invitee.html', error = msg)
-        else:
-            u = Invite.add_invite(self.firstname, self.lastname, self.email, self.psize)
-            u.put()
-            u.send_mail(self.email, u.auth_id)
-            self.redirect('/')
 
 class Signup(OhmanHandler):
 
@@ -404,15 +205,6 @@ class Logout(OhmanHandler):
         self.logout()
         self.redirect('/blog')
 
-class Welcome(OhmanHandler):
-
-    def get(self):
-        username = self.request.get('username')
-        if valid_username(username):
-            self.render('welcome.html', username = username)
-        else:
-            self.redirect('/unit2/signup')
-
 class Post(db.Model):
 
     subject = db.StringProperty(required = True)
@@ -423,43 +215,6 @@ class Post(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p = self)
-#rsvp stuff
-
-class ConfirmInvite(OhmanHandler):
-    def get(self):
-        auth_id = self.request.get('q')
-        if auth_id:
-            email = check_secure_val(auth_id)
-            if email:
-                i = Invite.by_email(email)
-                if i:
-                    if i.auth_flag == False:
-                        self.render('confirmation.html', message = 'Confirm?')
-                    else:
-                        self.redirect('/')
-                else:
-                    self.redirect('/')
-            else:
-                self.redirect('/')
-        else:
-            self.redirect('/')
-    def post(self):
-        confirmation = self.request.get("Yes")
-        auth_id = self.request.get('q')
-        email = check_secure_val(auth_id)
-        i = Invite.by_email(email)
-        if confirmation == "Yes":
-            i.confirm(email)
-            self.render('/confirmation.html', message = 'Thank you!')
-            self.redirect('/')
-        else:
-            self.render('/confirmation.html', message = 'Thank you!')
-            self.redirect('/')
-
-class InviteImages(OhmanHandler):
-
-    def get(self):
-        self.render("invite.html")
 
 class MainPage(OhmanHandler):
 
@@ -468,16 +223,16 @@ class MainPage(OhmanHandler):
         self.render('base.html')
 
 application = webapp2.WSGIApplication([('/', MainPage),
-                               #('/confirmation', ConfirmInvite),
+
                                #('/blog/?', RSVPFront),
-                               #('/invite', InviteImages),
+
                                #('/blog/([0-9]+)', PostPage),
                                #('/blog/newpost', NewPost),
                                #('/signup', Register),
                                #('/login', Login),
                                #('/logout', Logout),
                                #('/register', SelfRegisterInvite),
-                               #('/unit3/welcome', Unit3Welcome),
+
                                #('/admin/register', RegisterInvite),
                                ],
                               debug=True)
