@@ -4,7 +4,6 @@
 import os
 import jinja2
 import re
-from blumpkin import secret
 from string import letters
 
 
