@@ -5,8 +5,6 @@
 from vartools import *
 import webapp2
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 from google.appengine.api import urlfetch
 from google.appengine.api import mail
 from google.appengine.ext import db
@@ -153,39 +151,17 @@ class Invite(db.Model):
             #if not auth_flag == False:
             #   pass
             #else:            
-            sender_address = "<rsvp.karenandles@gmail.com>"
+            sender_address = "<rsvp@gmail.com>"
             subject = "You Are Invited!"
             message = mail.EmailMessage(sender=sender_address,
                                         subject=subject)
             user_address = email
 
-            img_name = 'Karen_and_Les_Wedding_Invite.jpg'
+            img_name = 'Wedding_Invite.jpg'
             message.to = user_address
             message.attachments = [(img_name, invite_jpg)]
             confirmation_url = cls.createNewUserConfirmation(user_address, auth_id)
-            message.body = """            
-Come celebrate the union of Karen and Les this July with us, 
-
-
-Fri 12 July 2013
-
-
-
-When you are ready to confirm your attendance please click the link below. 
-            %s
-            """ % confirmation_url
-
-            message.html = """
-<p> Come celebrate the union of Karen and Les this July with us, </p>
-
-<p> Fri 12 July 2013 </p>
-
-
-<p> When you are ready to confirm your attendance please click the link below. </p>
-
-
-<a href='%s'> Click here to confirm your attendance.</a>
-        """ % confirmation_url
+            message.body = "%s" % confirmation_url
 
             message.send()
 
@@ -398,8 +374,7 @@ class Post(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p = self)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 #rsvp stuff     
 
 class ConfirmInvite(OhmanHandler):
