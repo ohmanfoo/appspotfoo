@@ -1,72 +1,15 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-from string import letters
+
+#### Imports module ####
+
+
+from vartools import *
 import webapp2
-import jinja2
+
 from google.appengine.api import urlfetch
 from google.appengine.api import mail
 from google.appengine.ext import db
-template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
-                               autoescape = True)
-def valid_username(username):
-    return username and USER_RE.match(username)
 
-USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,30}$")
-EMAIL_RE  = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
-PASS_RE = re.compile(r"^.{3,20}$")
-
-def valid_password(password):
-    return password and PASS_RE.match(password)
-
-def valid_email(email):
-    return EMAIL_RE.match(email)
-
-def render_str(template, **params):
-    t = jinja_env.get_template(template)
-    return t.render(params)
-
-def make_secure_val(val):
-    return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
-
-def make_secure_eval(val):
-    return '%s;%s' % (val, hmac.new(secret, val).hexdigest())
-
-def check_secure_val(secure_val):
-    val = secure_val.split('|')[0]
-    if secure_val == make_secure_val(val):
-        return val
-
-def check_secure_eval(secure_val):
-    val = secure_val.split(';')[0]
-    if secure_val == make_secure_val(val):
-        return val
-
-def render_post(response, post):
-    response.out.write('<b>' + post.subject + '</b><br>')
-    response.out.write(post.content)
-
-def make_salt(length = 5):
-    return ''.join(random.choice(letters) for x in xrange(length))
-
-def make_pw_hash(name, pw, salt = None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest()
-    return '%s,%s' % (salt, h)
-
-def valid_pw(name, password, h):
-    salt = h.split(',')[0]
-    return h == make_pw_hash(name, password, salt)
-
-def invites_key(group = 'default'):
-    return db.Key.from_path('invites', group)
-
-def users_key(group = 'default'):
-    return db.Key.from_path('users', group)
+# main
 
 class OhmanHandler(webapp2.RequestHandler):
 
@@ -101,6 +44,8 @@ class OhmanHandler(webapp2.RequestHandler):
         uid = self.read_secure_cookie('user_id')
         self.user = uid and User.by_id(int(uid))
 
+#### User module ####
+
 class User(db.Model):
 
     name = db.StringProperty(required = True)
@@ -126,6 +71,34 @@ class User(db.Model):
         u = cls.by_name(name)
         if u and valid_pw(name, pw, u.pw_hash):
             return u
+
+class Login(OhmanHandler):
+
+    def get(self):
+        if not self.user:
+            self.render('login-form.html')
+        else:
+            self.redirect('/')
+
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+
+        u = User.login(username, password)
+        if u:
+            self.login(u)
+            self.redirect('/admin/register')
+        else:
+            msg = 'Invalid login'
+            self.render('login-form.html', error = msg)
+
+class Logout(OhmanHandler):
+
+    def get(self):
+        self.logout()
+        self.redirect('/blog')
+
+#### Invite/email module ####
 
 class Invite(db.Model):
 
@@ -323,6 +296,10 @@ class SelfRegisterInvite(SelfSignupInvite):
             u.send_mail(self.email, u.auth_id)
             self.redirect('/')
 
+
+#### user admin tools ####
+
+
 class Signup(OhmanHandler):
 
     def get(self):
@@ -378,40 +355,6 @@ class Register(Signup):
             self.login(u)
             self.redirect('/admin/register')
 
-class Login(OhmanHandler):
-
-    def get(self):
-        if not self.user:
-            self.render('login-form.html')
-        else:
-            self.redirect('/')
-
-    def post(self):
-        username = self.request.get('username')
-        password = self.request.get('password')
-
-        u = User.login(username, password)
-        if u:
-            self.login(u)
-            self.redirect('/admin/register')
-        else:
-            msg = 'Invalid login'
-            self.render('login-form.html', error = msg)
-
-class Logout(OhmanHandler):
-
-    def get(self):
-        self.logout()
-        self.redirect('/blog')
-
-class Welcome(OhmanHandler):
-
-    def get(self):
-        username = self.request.get('username')
-        if valid_username(username):
-            self.render('welcome.html', username = username)
-        else:
-            self.redirect('/unit2/signup')
 
 class Post(db.Model):
 
@@ -423,7 +366,7 @@ class Post(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p = self)
-#rsvp stuff
+#rsvp stuff     
 
 class ConfirmInvite(OhmanHandler):
     def get(self):
@@ -456,11 +399,13 @@ class ConfirmInvite(OhmanHandler):
             self.render('/confirmation.html', message = 'Thank you!')
             self.redirect('/')
 
+
+ #### Invites/Emails Module img tools ####
 class InviteImages(OhmanHandler):
 
     def get(self):
         self.render("invite.html")
-
+  
 class MainPage(OhmanHandler):
 
     def get(self):
