@@ -6,15 +6,15 @@ from vartools import *
 import webapp2
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from google.appengine.api import urlfetch
 from google.appengine.api import mail
 from google.appengine.ext import db
 
 # main
-=======
+
 def users_key(group = 'default'):
     return db.Key.from_path('users', group)
->>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 
 class OhmanHandler(webapp2.RequestHandler):
 
@@ -77,7 +77,7 @@ class User(db.Model):
         if u and valid_pw(name, pw, u.pw_hash):
             return u
 
-<<<<<<< HEAD
+
 class Login(OhmanHandler):
 
     def get(self):
@@ -306,8 +306,6 @@ class SelfRegisterInvite(SelfSignupInvite):
 #### user admin tools ####
 
 
-=======
->>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 class Signup(OhmanHandler):
 
     def get(self):
@@ -363,8 +361,7 @@ class Register(Signup):
             self.login(u)
             self.redirect('/admin/register')
 
-<<<<<<< HEAD
-=======
+
 class Login(OhmanHandler):
 
     def get(self):
@@ -390,7 +387,6 @@ class Logout(OhmanHandler):
     def get(self):
         self.logout()
         self.redirect('/blog')
->>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 
 class Post(db.Model):
 
@@ -402,6 +398,7 @@ class Post(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p = self)
+<<<<<<< HEAD
 <<<<<<< HEAD
 #rsvp stuff     
 
@@ -443,9 +440,7 @@ class InviteImages(OhmanHandler):
     def get(self):
         self.render("invite.html")
   
-=======
 
->>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 class MainPage(OhmanHandler):
 
     def get(self):
