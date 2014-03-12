@@ -6,7 +6,7 @@ body {
     font-size: 1em;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
+    overflow: auto; 
 }
 
 p {
@@ -88,7 +88,8 @@ ul {
 }
 
 .box {
-    float: left; 
+    float: left;
+    overflow: auto; 
 }
 
 .box > h2 {

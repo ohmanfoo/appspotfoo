@@ -5,11 +5,16 @@
 from vartools import *
 import webapp2
 
+<<<<<<< HEAD
 from google.appengine.api import urlfetch
 from google.appengine.api import mail
 from google.appengine.ext import db
 
 # main
+=======
+def users_key(group = 'default'):
+    return db.Key.from_path('users', group)
+>>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 
 class OhmanHandler(webapp2.RequestHandler):
 
@@ -72,6 +77,7 @@ class User(db.Model):
         if u and valid_pw(name, pw, u.pw_hash):
             return u
 
+<<<<<<< HEAD
 class Login(OhmanHandler):
 
     def get(self):
@@ -300,6 +306,8 @@ class SelfRegisterInvite(SelfSignupInvite):
 #### user admin tools ####
 
 
+=======
+>>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 class Signup(OhmanHandler):
 
     def get(self):
@@ -355,6 +363,34 @@ class Register(Signup):
             self.login(u)
             self.redirect('/admin/register')
 
+<<<<<<< HEAD
+=======
+class Login(OhmanHandler):
+
+    def get(self):
+        if not self.user:
+            self.render('login-form.html')
+        else:
+            self.redirect('/')
+
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+
+        u = User.login(username, password)
+        if u:
+            self.login(u)
+            self.redirect('/admin/register')
+        else:
+            msg = 'Invalid login'
+            self.render('login-form.html', error = msg)
+
+class Logout(OhmanHandler):
+
+    def get(self):
+        self.logout()
+        self.redirect('/blog')
+>>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 
 class Post(db.Model):
 
@@ -366,6 +402,7 @@ class Post(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p = self)
+<<<<<<< HEAD
 #rsvp stuff     
 
 class ConfirmInvite(OhmanHandler):
@@ -406,6 +443,9 @@ class InviteImages(OhmanHandler):
     def get(self):
         self.render("invite.html")
   
+=======
+
+>>>>>>> 1c6e111e77b6aa6f90b45aec34b54207c024fea5
 class MainPage(OhmanHandler):
 
     def get(self):
@@ -413,16 +453,16 @@ class MainPage(OhmanHandler):
         self.render('base.html')
 
 application = webapp2.WSGIApplication([('/', MainPage),
-                               #('/confirmation', ConfirmInvite),
+
                                #('/blog/?', RSVPFront),
-                               #('/invite', InviteImages),
+
                                #('/blog/([0-9]+)', PostPage),
                                #('/blog/newpost', NewPost),
                                #('/signup', Register),
                                #('/login', Login),
                                #('/logout', Logout),
                                #('/register', SelfRegisterInvite),
-                               #('/unit3/welcome', Unit3Welcome),
+
                                #('/admin/register', RegisterInvite),
                                ],
                               debug=True)
